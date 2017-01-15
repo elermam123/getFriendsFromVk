@@ -9,6 +9,7 @@
 #import "FSServerManager.h"
 #import "FSUser.h"
 #import "AFNetworking.h"
+#import "FSWall.h"
 
 @interface FSServerManager ()
 
@@ -54,7 +55,7 @@
      @"name",       @"order",
      @(count),      @"count",
      @(offset),     @"offset",
-     @"photo_50",   @"fields",
+     @"photo_100",   @"fields",
      @"nom",        @"name_case", nil];
     
     
@@ -101,9 +102,9 @@
     
     NSDictionary* params =
     [NSDictionary dictionaryWithObjectsAndKeys:
-     userID,    @"user_ids",
+     userID,                                   @"user_ids",
      @"city, bdate, sex, photo_100, online",   @"fields",
-     @"nom",        @"name_case", nil];
+     @"nom",                                   @"name_case", nil];
     
     
     [self.requestOperationManager
@@ -137,9 +138,60 @@
          
      }];
     
+}
+
+- (void) getWallById:(NSString*) userID
+               count:(NSInteger) count
+              offset:(NSInteger) offset
+           onSuccess:(void(^)(NSArray* friends)) success
+           onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure{
+    
+    NSDictionary* params =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     userID,           @"owner_id",
+     @(count),      @"count",
+     @(offset),     @"offset",
+     @"owner",      @"filter", nil];
+    
+    [self.requestOperationManager
+     GET:@"wall.get?v=3.0"
+     parameters:params
+     progress:nil
+     success:^(NSURLSessionTask *task, id responseObject) {
+         NSLog(@"JSON: %@", responseObject);
+         
+         NSArray* dictsArray = [responseObject objectForKey:@"response"];
+         
+         NSMutableArray* objectsArray = [NSMutableArray array];
+         
+         for (int i = 1; i < [dictsArray count]; i++) {
+             
+             FSWall *wall = [[FSWall alloc] initWithServerResponse:[dictsArray objectAtIndex:i]];
+             [objectsArray addObject:wall];
+             
+         }
+         
+         
+         
+         if(success){
+             success(objectsArray);
+         }
+         
+         
+     } failure:^(NSURLSessionTask *operation, NSError *error) {
+         NSLog(@"Error: %@", error);
+         
+         if(failure){
+             //failure(error, operation.);
+         }
+         
+     }];
+
 
     
+    
 }
+
 
 
 

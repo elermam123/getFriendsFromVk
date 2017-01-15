@@ -33,6 +33,8 @@
 		7E95AD461E2815FB000FE24D /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E95AD361E2815FB000FE24D /* UIRefreshControl+AFNetworking.m */; };
 		7E95AD471E2815FB000FE24D /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E95AD381E2815FB000FE24D /* UIWebView+AFNetworking.m */; };
 		7E95AD4A1E2825C9000FE24D /* FSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E95AD491E2825C9000FE24D /* FSUser.m */; };
+		7EAF205B1E2C1D740076B7EA /* FSWallController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAF205A1E2C1D740076B7EA /* FSWallController.m */; };
+		7EAF205E1E2C25A70076B7EA /* FSWall.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAF205D1E2C25A70076B7EA /* FSWall.m */; };
 		7ECC0E551E29569E00A8E7FE /* FSDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ECC0E541E29569E00A8E7FE /* FSDetailViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +110,10 @@
 		7E95AD381E2815FB000FE24D /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		7E95AD481E2825C8000FE24D /* FSUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSUser.h; sourceTree = "<group>"; };
 		7E95AD491E2825C9000FE24D /* FSUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSUser.m; sourceTree = "<group>"; };
+		7EAF20591E2C1D740076B7EA /* FSWallController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSWallController.h; sourceTree = "<group>"; };
+		7EAF205A1E2C1D740076B7EA /* FSWallController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSWallController.m; sourceTree = "<group>"; };
+		7EAF205C1E2C25A70076B7EA /* FSWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSWall.h; sourceTree = "<group>"; };
+		7EAF205D1E2C25A70076B7EA /* FSWall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSWall.m; sourceTree = "<group>"; };
 		7ECC0E531E29569E00A8E7FE /* FSDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDetailViewController.h; sourceTree = "<group>"; };
 		7ECC0E541E29569E00A8E7FE /* FSDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,14 +169,18 @@
 				7E95AD151E2815FB000FE24D /* Libs */,
 				7E95ACDD1E2801F7000FE24D /* AppDelegate.h */,
 				7E95ACDE1E2801F7000FE24D /* AppDelegate.m */,
-				7ECC0E531E29569E00A8E7FE /* FSDetailViewController.h */,
-				7ECC0E541E29569E00A8E7FE /* FSDetailViewController.m */,
-				7E95AD121E280739000FE24D /* FSServerManager.h */,
-				7E95AD131E280739000FE24D /* FSServerManager.m */,
 				7E95AD481E2825C8000FE24D /* FSUser.h */,
 				7E95AD491E2825C9000FE24D /* FSUser.m */,
+				7EAF205C1E2C25A70076B7EA /* FSWall.h */,
+				7EAF205D1E2C25A70076B7EA /* FSWall.m */,
+				7EAF20591E2C1D740076B7EA /* FSWallController.h */,
+				7EAF205A1E2C1D740076B7EA /* FSWallController.m */,
+				7ECC0E531E29569E00A8E7FE /* FSDetailViewController.h */,
+				7ECC0E541E29569E00A8E7FE /* FSDetailViewController.m */,
 				7E95ACE01E2801F7000FE24D /* FSViewController.h */,
 				7E95ACE11E2801F7000FE24D /* FSViewController.m */,
+				7E95AD121E280739000FE24D /* FSServerManager.h */,
+				7E95AD131E280739000FE24D /* FSServerManager.m */,
 				7E95ACE31E2801F7000FE24D /* Main.storyboard */,
 				7E95ACE91E2801F7000FE24D /* Assets.xcassets */,
 				7E95ACEB1E2801F7000FE24D /* LaunchScreen.storyboard */,
@@ -414,10 +424,12 @@
 				7E95AD3E1E2815FB000FE24D /* AFURLSessionManager.m in Sources */,
 				7E95AD461E2815FB000FE24D /* UIRefreshControl+AFNetworking.m in Sources */,
 				7E95AD471E2815FB000FE24D /* UIWebView+AFNetworking.m in Sources */,
+				7EAF205B1E2C1D740076B7EA /* FSWallController.m in Sources */,
 				7E95AD3D1E2815FB000FE24D /* AFURLResponseSerialization.m in Sources */,
 				7E95AD3A1E2815FB000FE24D /* AFNetworkReachabilityManager.m in Sources */,
 				7E95AD3B1E2815FB000FE24D /* AFSecurityPolicy.m in Sources */,
 				7E95AD391E2815FB000FE24D /* AFHTTPSessionManager.m in Sources */,
+				7EAF205E1E2C25A70076B7EA /* FSWall.m in Sources */,
 				7E95ACDF1E2801F7000FE24D /* AppDelegate.m in Sources */,
 				7E95AD411E2815FB000FE24D /* AFNetworkActivityIndicatorManager.m in Sources */,
 				7E95ACDC1E2801F7000FE24D /* main.m in Sources */,

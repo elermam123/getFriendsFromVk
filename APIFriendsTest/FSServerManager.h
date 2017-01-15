@@ -18,8 +18,14 @@
                     onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 - (void) getFriendInfoById:(NSString*) userID
-                    onSuccess:(void(^)(NSArray* friends)) success
-                    onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+                 onSuccess:(void(^)(NSArray* friends)) success
+                 onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+
+- (void) getWallById:(NSString*) userID
+               count:(NSInteger) count
+              offset:(NSInteger) offset
+           onSuccess:(void(^)(NSArray* friends)) success
+           onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 
 @end

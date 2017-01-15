@@ -10,8 +10,11 @@
 #import "FSServerManager.h"
 #import "UIImageView+AFNetworking.h"
 #import "FSUser.h"
+#import "FSWallController.h"
 
 @interface FSDetailViewController ()
+
+@property (strong,nonatomic) NSString *uID;
 
 @end
 
@@ -30,20 +33,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
 -(void) getFriendsDetailInfo:(NSString*) userID{
     NSLog(@"userID = %@", userID);
+    self.uID = userID;
     [[FSServerManager sharedManager]
      getFriendInfoById:userID
      onSuccess:^(NSArray *friends) {
@@ -53,17 +52,22 @@
          if(user.cityTitle){
              self.friendCity.text = user.cityTitle;
          }
-        
+         else{
+             self.friendCity.text = @"";
+         }
          
          NSInteger isOnline  = [user.isOnline integerValue];
          NSString*  onlineStr = isOnline == 1 ?  @"Online" : @"Offline";
+         UIColor *color = isOnline == 1 ? [UIColor greenColor] : [UIColor lightGrayColor];
+         self.online.textColor = color;
          self.online.text = onlineStr;
          
          if(user.bDate){
              self.bDate.text  = user.bDate;
          }
          else{
-             self.bDate.text = @"";
+             self.bDate.text = @"--.--.--";
+             self.bDate.textColor = [UIColor lightGrayColor];
          }
          NSInteger sexVar = [user.sex integerValue];
          NSString* sexText = sexVar == 1 ? @"Female" : @"Male";
@@ -78,6 +82,13 @@
           placeholderImage:nil
           success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
               self.friendAvatar.image = image;
+              CALayer *imageLayer = self.friendAvatar.layer;
+              [imageLayer setCornerRadius:46];
+              [imageLayer setBorderWidth:2];
+              [imageLayer setBorderColor:[[UIColor grayColor] CGColor]];
+              [imageLayer setMasksToBounds:YES];
+              
+              
               [self.friendAvatar layoutSubviews];
           }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
               
@@ -89,6 +100,22 @@
          NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
      }];
 
+}
+
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    if ([[segue identifier] isEqualToString:@"wallInfo"]) {
+        NSLog(@"Enter to WALLLLL!!!!!");
+        
+        FSWallController *wallVC = [segue destinationViewController];
+        [wallVC getWallInfo:self.uID];
+        
+       // FSDetailViewController *detailVC = [segue destinationViewController];
+        //[detailVC getFriendsDetailInfo:friend.userId];
+        
+        
+    }
     
 }
 

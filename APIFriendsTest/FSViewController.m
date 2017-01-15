@@ -16,6 +16,7 @@
 @interface FSViewController ()
 
 @property (strong, nonatomic) NSMutableArray *friendsArray;
+@property (assign,nonatomic) BOOL loadingData;
 
 @end
 
@@ -28,7 +29,7 @@ static NSInteger friendsInRequest = 10;
     // Do any additional setup after loading the view, typically from a nib.
     
     self.friendsArray = [NSMutableArray array];
-    
+    self.loadingData = YES;
     [self getFriendsFromServer];
 }
 
@@ -54,8 +55,8 @@ static NSInteger friendsInRequest = 10;
          [self.tableView beginUpdates];
          [self.tableView insertRowsAtIndexPaths:newPaths withRowAnimation:UITableViewRowAnimationTop];
          [self.tableView endUpdates];
+         self.loadingData = NO;
          
-         [self.tableView reloadData];
      }
      onFailure:^(NSError *error, NSInteger statusCode) {
          NSLog(@"error = %@, code = %ld", [error localizedDescription], statusCode);
@@ -66,7 +67,7 @@ static NSInteger friendsInRequest = 10;
 #pragma mark
 -(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return [self.friendsArray count] + 1;
+    return [self.friendsArray count] ;
 }
 
 
@@ -79,47 +80,49 @@ static NSInteger friendsInRequest = 10;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
-    if(indexPath.row  == [self.friendsArray count]){
-        cell.textLabel.text = @"Load Next Friends ...";
-        cell.imageView.image = nil;
-    }
-    else{
-        
-        FSUser* friend = [self.friendsArray objectAtIndex:indexPath.row];
-        
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:friend.imageUrl_50];
-        
-        __weak UITableViewCell *weakCell = cell;
-        
-        
-        
-        [cell.imageView
-         setImageWithURLRequest:request
-         placeholderImage:nil
-         success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
-             weakCell.imageView.image = image;
-             [weakCell layoutSubviews];
-         }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-             
-         }];
-        
-    }
+    
+    FSUser* friend = [self.friendsArray objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:friend.imageUrl_100];
+    
+    __weak UITableViewCell *weakCell = cell;
+    
+    [cell.imageView
+     setImageWithURLRequest:request
+     placeholderImage:nil
+     success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
+         weakCell.imageView.image = image;
+         [weakCell layoutSubviews];
+     }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+         
+     }];
+    
     
     return cell;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height) {
+        if (!self.loadingData)
+        {
+            self.loadingData = YES;
+            [self getFriendsFromServer];
+        }
+    }
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 50;
 }
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if(indexPath.row  == [self.friendsArray count]){
-        
-        [self getFriendsFromServer];
-    }
-    
-        
+
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -127,11 +130,13 @@ static NSInteger friendsInRequest = 10;
     if ([[segue identifier] isEqualToString:@"Detail"]) {
         NSLog(@"vse polu4ilosssss!!!!!");
         
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        FSUser *friend = [self.friendsArray objectAtIndex:indexPath.row];
-        FSDetailViewController *detailVC = [segue destinationViewController];
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        if(indexPath.row != [self.friendsArray count]){
+            FSUser *friend = [self.friendsArray objectAtIndex:indexPath.row];
+            FSDetailViewController *detailVC = [segue destinationViewController];
+            [detailVC getFriendsDetailInfo:friend.userId];
+        }
         
-        [detailVC getFriendsDetailInfo:friend.userId];
     }
     
 }
