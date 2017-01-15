@@ -33,6 +33,7 @@
 		7E95AD461E2815FB000FE24D /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E95AD361E2815FB000FE24D /* UIRefreshControl+AFNetworking.m */; };
 		7E95AD471E2815FB000FE24D /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E95AD381E2815FB000FE24D /* UIWebView+AFNetworking.m */; };
 		7E95AD4A1E2825C9000FE24D /* FSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E95AD491E2825C9000FE24D /* FSUser.m */; };
+		7ECC0E551E29569E00A8E7FE /* FSDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ECC0E541E29569E00A8E7FE /* FSDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,8 @@
 		7E95AD381E2815FB000FE24D /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		7E95AD481E2825C8000FE24D /* FSUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSUser.h; sourceTree = "<group>"; };
 		7E95AD491E2825C9000FE24D /* FSUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSUser.m; sourceTree = "<group>"; };
+		7ECC0E531E29569E00A8E7FE /* FSDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDetailViewController.h; sourceTree = "<group>"; };
+		7ECC0E541E29569E00A8E7FE /* FSDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +163,8 @@
 				7E95AD151E2815FB000FE24D /* Libs */,
 				7E95ACDD1E2801F7000FE24D /* AppDelegate.h */,
 				7E95ACDE1E2801F7000FE24D /* AppDelegate.m */,
+				7ECC0E531E29569E00A8E7FE /* FSDetailViewController.h */,
+				7ECC0E541E29569E00A8E7FE /* FSDetailViewController.m */,
 				7E95AD121E280739000FE24D /* FSServerManager.h */,
 				7E95AD131E280739000FE24D /* FSServerManager.m */,
 				7E95AD481E2825C8000FE24D /* FSUser.h */,
@@ -402,6 +407,7 @@
 				7E95AD451E2815FB000FE24D /* UIProgressView+AFNetworking.m in Sources */,
 				7E95AD401E2815FB000FE24D /* AFImageDownloader.m in Sources */,
 				7E95AD3F1E2815FB000FE24D /* AFAutoPurgingImageCache.m in Sources */,
+				7ECC0E551E29569E00A8E7FE /* FSDetailViewController.m in Sources */,
 				7E95ACE21E2801F7000FE24D /* FSViewController.m in Sources */,
 				7E95AD431E2815FB000FE24D /* UIButton+AFNetworking.m in Sources */,
 				7E95AD421E2815FB000FE24D /* UIActivityIndicatorView+AFNetworking.m in Sources */,

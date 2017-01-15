@@ -16,11 +16,26 @@
     if (self) {
         self.firstName = [responseObject objectForKey:@"first_name"];
         self.lastName = [responseObject objectForKey:@"last_name"];
+        self.userId = [responseObject objectForKey:@"user_id"];
         
-        NSString* urlString = [responseObject objectForKey:@"photo_50"];
-        if(urlString){
-            self.imageUrl = [NSURL URLWithString:urlString];
+        NSDictionary *cityObject  = [responseObject objectForKey:@"city"];
+        self.cityTitle = [cityObject objectForKey:@"title"];
+        
+        self.bDate = [responseObject objectForKey:@"bdate"];
+        self.sex = [responseObject objectForKey:@"sex"];
+        self.isOnline = [responseObject objectForKey:@"online"];
+        
+        NSString* urlString_photo50 = [responseObject objectForKey:@"photo_50"];
+        if(urlString_photo50){
+            self.imageUrl_50 = [NSURL URLWithString:urlString_photo50];
         }
+
+        NSString* urlString_photo100 = [responseObject objectForKey:@"photo_100"];
+        if(urlString_photo100){
+            self.imageUrl_100 = [NSURL URLWithString:urlString_photo100];
+        }
+
+        
     }
     return self;
 }

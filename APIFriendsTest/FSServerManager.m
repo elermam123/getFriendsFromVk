@@ -90,16 +90,54 @@
     }];
     
     
-    /*
-    friends.get
     
-    user_id 5787951
-    order name
-    offset
-    fields photo_50
+}
+
+
+- (void) getFriendInfoById:(NSString*) userID
+                 onSuccess:(void(^)(NSArray* friends)) success
+                 onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure{
     
-    name_case nom
-   */
+    
+    NSDictionary* params =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     userID,    @"user_ids",
+     @"city, bdate, sex, photo_100, online",   @"fields",
+     @"nom",        @"name_case", nil];
+    
+    
+    [self.requestOperationManager
+     GET:@"users.get?v=5.62"
+     parameters:params
+     progress:nil
+     success:^(NSURLSessionTask *task, id responseObject) {
+         NSLog(@"JSON: %@", responseObject);
+         
+         NSArray* dictsArray = [responseObject objectForKey:@"response"];
+         
+         NSMutableArray* objectsArray = [NSMutableArray array];
+         
+         for(NSDictionary* dict in dictsArray){
+             FSUser* user = [[FSUser alloc] initWithServerResponse:dict];
+             [objectsArray addObject:user];
+         }
+         
+         
+         if(success){
+             success(objectsArray);
+         }
+         
+         
+     } failure:^(NSURLSessionTask *operation, NSError *error) {
+         NSLog(@"Error: %@", error);
+         
+         if(failure){
+             //failure(error, operation.);
+         }
+         
+     }];
+    
+
     
 }
 

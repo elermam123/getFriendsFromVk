@@ -12,7 +12,15 @@
 
 @property (strong, nonatomic) NSString* firstName;
 @property (strong, nonatomic) NSString* lastName;
-@property (strong, nonatomic) NSURL* imageUrl;
+@property (strong, nonatomic) NSString* userId;
+@property (strong, nonatomic) NSURL* imageUrl_50;
+@property (strong, nonatomic) NSURL* imageUrl_100;
+@property (strong, nonatomic) NSString* cityTitle;
+@property (assign, nonatomic) NSString* sex;
+@property (strong, nonatomic) NSString* bDate;
+@property (strong, nonatomic) NSString* isOnline;
+
+
 
 -(id) initWithServerResponse:(NSDictionary*) responseObject;
 

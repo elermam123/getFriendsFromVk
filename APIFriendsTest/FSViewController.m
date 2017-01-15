@@ -9,6 +9,7 @@
 #import "FSViewController.h"
 #import "FSServerManager.h"
 #import "FSUser.h"
+#import "FSDetailViewController.h"
 #import "UIImageView+AFNetworking.h"
 
 
@@ -20,7 +21,7 @@
 
 @implementation FSViewController
 
-static NSInteger friendsInRequest = 5;
+static NSInteger friendsInRequest = 10;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -88,9 +89,11 @@ static NSInteger friendsInRequest = 5;
         
         cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
         
-        NSURLRequest *request = [NSURLRequest requestWithURL:friend.imageUrl];
+        NSURLRequest *request = [NSURLRequest requestWithURL:friend.imageUrl_50];
         
         __weak UITableViewCell *weakCell = cell;
+        
+        
         
         [cell.imageView
          setImageWithURLRequest:request
@@ -109,11 +112,28 @@ static NSInteger friendsInRequest = 5;
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if(indexPath.row  == [self.friendsArray count]){
         
         [self getFriendsFromServer];
-    
     }
+    
+        
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    if ([[segue identifier] isEqualToString:@"Detail"]) {
+        NSLog(@"vse polu4ilosssss!!!!!");
+        
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        FSUser *friend = [self.friendsArray objectAtIndex:indexPath.row];
+        FSDetailViewController *detailVC = [segue destinationViewController];
+        
+        [detailVC getFriendsDetailInfo:friend.userId];
+    }
+    
 }
 
 

@@ -17,4 +17,9 @@
                     onSuccess:(void(^)(NSArray* friends)) success
                     onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
+- (void) getFriendInfoById:(NSString*) userID
+                    onSuccess:(void(^)(NSArray* friends)) success
+                    onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+
+
 @end
